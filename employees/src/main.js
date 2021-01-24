@@ -7,7 +7,8 @@ import Grid from "./components/grid";
 function Main () {
     const [users, setUsers] = useState([]);
     const [newUsers, setNewUsers] = useState([]);
-    const [order, setOrder] = useState("asc");
+    const [order, setOrder] = useState("default");
+    const [numOrder, setNumOrder] = useState("default");
     const [search, setSearch] = useState("");
 
     
@@ -58,7 +59,7 @@ function Main () {
         console.log(current);
 
         if (col === "name.first") {
-            if (clickOrder === "asc") {
+            if (clickOrder === "down" || clickOrder === "default") {
                 newSort = current.sort((a,b) => {
 
                     if (`a.${col} > b.${col}`) {
@@ -70,7 +71,7 @@ function Main () {
                     return 0;
                 });
 
-                setOrder("desc");
+                setOrder("up");
 
             }
             else {
@@ -85,24 +86,24 @@ function Main () {
                     return 0;
                 });
 
-                setOrder("asc");
+                setOrder("down");
             }
         }
         else {
-            if (clickOrder === "asc") {
-                newSort = current.sort((a,b) => {
-                    return a.registered.age - b.registered.age
-                })
-
-                setOrder("desc");
-            }
-
-            else if (clickOrder === "desc") {
+            if (clickOrder === "down" || clickOrder === "default") {
                 newSort = current.sort((a,b) => {
                     return b.registered.age - a.registered.age
                 })
 
-                setOrder("asc");
+                setNumOrder("up");
+            }
+
+            else if (clickOrder === "up") {
+                newSort = current.sort((a,b) => {
+                    return a.registered.age - b.registered.age
+                })
+
+                setNumOrder("down");
 
             }
     
@@ -125,7 +126,7 @@ function Main () {
 
 
     return (
-        <UserContext.Provider value={{users, sortUsers, order, search, handleSearch}}>
+        <UserContext.Provider value={{users, sortUsers, order, numOrder, search, handleSearch}}>
             <Search />
             <Grid />
         </UserContext.Provider>

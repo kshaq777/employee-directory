@@ -4,7 +4,7 @@ import UserContext from "../util/UserContext";
 import moment from "moment";
 
 function Grid() {
-    const {users, sortUsers, order, search} = useContext(UserContext);
+    const {users, sortUsers, order, numOrder, search} = useContext(UserContext);
 
     let userArr = [...users];
     // console.log(userArr)
@@ -17,13 +17,16 @@ function Grid() {
     return (
         <table className="table table-striped table-dark">
             <thead>
-                <tr>
+                <tr> 
                 <th scope="col"></th>
-                <th scope="col">Name <span><i name="name.first" order={order} onClick={sortUsers} className="fas fa-sort"></i></span></th>
+                <th scope="col">Name <span><i name="name.first" order={order} onClick={sortUsers} 
+                    className={(order === "default") ? `fas fa-sort` : `fas fa-sort-${order}`  }></i></span></th>
+
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Address</th>
-                <th scope="col">Tenure <span><i name="registered.age" order={order} onClick={sortUsers} className="fas fa-sort"></i></span></th>
+                <th scope="col">Tenure <span><i name="registered.age" order={numOrder} onClick={sortUsers} 
+                    className={(numOrder === "default") ? `fas fa-sort` : `fas fa-sort-${numOrder}`  }></i></span></th>
                 <th scope="col">Birhday</th>
                 </tr>
             </thead>
