@@ -32,9 +32,8 @@ npm i
 ```
 
 ## Areas to Improve
-* Refine searches using number to only include certain columns
+* Refine searches using number to only include columns shown on table, rather than all in the user object
 * Expand sorting capabilities
-* Change sort icon based on direction
 
 
 ## Questions
